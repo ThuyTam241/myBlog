@@ -1,0 +1,172 @@
+{% extends 'blog/base.html' %} 
+
+{% block content %}
+<header class="py-5 bg-light shadow-sm border-bottom mb-4">
+	<div class="container">
+		<div class="text-center my-5">
+			<h1 class="fw-bolder">Welcome to Blog Home!</h1>
+			<p class="lead mb-0">
+				Discover Your Journey: Unleashing Inspiration, Embracing Growth.
+				Your Daily Source of Wisdom and Wonder.
+			</p>
+		</div>
+	</div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <!-- Side widgets-->
+    <div class="col-lg-4">
+      <!-- Search widget-->
+      <div class="position-relative custom-form-group">
+        <input
+          class="form-control custom-form-control rounded-pill border-0"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="button-search"
+        />
+        <i class="search-icon fa-solid fa-magnifying-glass"></i>
+      </div>
+      <!-- Categories widget-->
+      <div class="custom-list-group">
+        <h5 class="fw-bold mb-4">Categories</h5>
+        <ul class="list-group scroll-shadows">
+          <li class="list-group-item active" aria-current="true">
+            An active item
+          </li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">And a fifth one</li>
+        </ul>
+      </div>
+      <!-- Sorter -->
+      <div class="btn-group">
+        <button
+          class="btn btn-primary btn-sm dropdown-toggle sorter"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Sort by
+        </button>
+        <ul class="dropdown-menu custom-dropdown-menu">
+          <li><a class="dropdown-item">Title</a></li>
+          <li><a class="dropdown-item">Created Date</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Blog entries-->
+    <div class="col-lg-8">
+      <div class="row">
+        {% for object in object_list %}
+					<div class="col-lg-6">
+						<div class="card shadow-sm mb-4">
+							<a href="#!"
+								><img
+									class="card-img-top"
+									src="{{ object.imageLink }}"
+									alt="..."
+							/></a>
+							<div class="card-body">
+								<div class="small text-muted">{{ object.date }}</div>
+								<h6>{{ object.author.username }}</h6>
+								<h2 class="card-title h4">{{ object.title }}</h2>
+								<p class="card-text">
+									{{ object.description }}
+								</p>
+								<a class="btn btn-primary" href="#!">Read more →</a>
+							</div>
+						</div>
+					</div>
+        {% endfor %}
+      </div>
+      <!-- Pagination-->
+      <nav aria-label="Pagination">
+        <ul class="pagination justify-content-center my-4">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+              >Newer</a
+            >
+          </li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#!">1</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#!">2</a></li>
+          <li class="page-item"><a class="page-link" href="#!">3</a></li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#!">...</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#!">15</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#!">Older</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+{% comment %} {% for object in object_list %}
+<div class="row">
+  <div class="col-md-6 col-11 mx-md-auto mx-3 mt-5 mb-5">
+    <h3 class="fw-bold">{{ object.title }}</h3>
+    <p class="text-muted">{{ object.date }}</p>
+    <p class="text-muted">Posted by {{ object.author.username }}</p>
+    {% if object.likes.count == 1 %}
+    <p class="text-muted">{{ object.likes.count }} person likes this post</p>
+    {% else %}
+    <p class="text-muted">{{ object.likes.count }} people like this post</p>
+    {% endif %}
+
+    <div class="my-3">{{ object.content|truncatewords_html:50|safe }}</div>
+
+    <a href="{% url 'detail_article' object.id %}">Read more</a>
+  </div>
+</div>
+{% endfor %}{% endcomment %} {% comment %}
+<nav>
+  <ul class="pagination">
+    <div class="mx-auto d-flex flex-row mt-5">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1">&laquo; First</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+          >Previous</a
+        >
+      </li>
+      {% endif %}
+
+      <li class="page-item">
+        <a class="page-link" href="#"
+          >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a
+        >
+      </li>
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+          >Next</a
+        >
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"
+          >Last &raquo;</a
+        >
+      </li>
+      {% endif %}
+    </div>
+  </ul>
+</nav>
+{% endcomment %} {% endblock content %}
