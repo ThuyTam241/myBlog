@@ -1,3 +1,7 @@
+* {
+  font-family: 'Signika' !important;
+}
+
 :root {
   --primary-color: #F3F3F3;
   --main-text-color: #20215B;
@@ -30,4 +34,8 @@ h1 {
   text-decoration: none;
   font-size: 20px;
   font-weight: bolder;
+}
+
+td {
+  vertical-align: middle;
 }

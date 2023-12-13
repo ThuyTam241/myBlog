@@ -29,19 +29,19 @@ class SearchView(ListView):
 
 	def get_queryset(self):
 		query = self.request.GET.get('q')
-		order_by = self.request.GET.get('order_by', 'title')
+		# order_by = self.request.GET.get('order_by', 'title')
 			
 		if query:
-			queryset = Article.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+			queryset = Article.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
 		else:
 			queryset = Article.objects.all()
 
-		if order_by == 'title':
-			queryset = queryset.order_by('title')
-		elif order_by == 'date':
-			queryset = queryset.order_by('date')
-		else:
-			queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count')
+		# if order_by == 'title':
+		# 	queryset = queryset.order_by('title')
+		# elif order_by == 'date':
+		# 	queryset = queryset.order_by('date')
+		# else:
+		# 	queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count')
 		return queryset
 
 class ArticlesByCategory(ListView):
@@ -59,7 +59,7 @@ class ArticlesByCategory(ListView):
 
 class Featured(ListView):
 	model = Article
-	queryset = Article.objects.filter(featured=True).order_by('-date')
+	queryset = Article.objects.filter(featured=True).order_by('title')
 	template_name = 'blog/featured.html'
 	paginate_by = 6
 
