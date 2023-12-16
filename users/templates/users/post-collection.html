@@ -28,7 +28,7 @@
   <body class="h-100 d-flex flex-column">
     {% include 'blog/nav.html' %} 
     
-    <div class="container mt-3">
+    <div class="container mt-3 mb-5">
         <div class="row">
             <!-- Side widgets-->
             <div class="col-lg-4">
@@ -72,7 +72,7 @@
                                     <td style="display: flex;">
                                         <button type="button" class="btn btn-outline-primary ms-1"
                                             style="background-color: #20215B;color: white;border: none;">Edit</button>
-                                        <a href="{% url 'delete_article' x.id %}" class="btn btn-danger ms-1" style="border: none;">Delete</a>
+                                        <a href="{% url 'delete_article' x.id %}" class="btn ms-1" style="border: none; background-color: #D62828 !important; color: white;">Delete</a>
                                     </td>
                                 </tr>
                               {% endfor %}

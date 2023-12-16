@@ -3,7 +3,6 @@ from django.views import View
 from .forms import UserRegisterForm
 from .forms import UserUpdateForm
 from django.contrib.auth import logout
-
 from django import forms
 from django.contrib.auth.models import User
 

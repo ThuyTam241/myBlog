@@ -17,7 +17,6 @@ class UserUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
         
-        # Add 'form-control' class to all input fields
         for field_name in self.fields:
             self.fields[field_name].widget.attrs['class'] = 'form-control'
 
