@@ -59,7 +59,7 @@
       <div class="row">
         {% for object in object_list %}
         <div class="col-lg-6 main">
-          <a href="{% url 'detail_article' object.id %}">
+          <a href="{% url 'detail_article' object.id %}" class="text-decoration-none">
             <div class="card shadow-sm mb-4">
               <img class="card-img-top object-fit-cover" src="{{ object.imageLink }}" alt="..." height="250" />
               <div class="card-body">
@@ -88,7 +88,8 @@
                       </p>
                       {% else %}
                       <button class="btn btn-outline-primary d-flex align-items-center likes" disabled>
-                        <ion-icon name="heart-outline"></ion-icon>Login to like
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <p class="mb-0 ms-1">Login to like</p>
                       </button>
                       <p class="ml-auto ms-3 mt-3 likes-text">
                         {{ object.likes.count }} Likes
