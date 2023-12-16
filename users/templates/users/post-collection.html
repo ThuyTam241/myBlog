@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,7 +25,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
     <title>{{title}}</title>
   </head>
-  <body>
+  <body class="h-100 d-flex flex-column">
     {% include 'blog/nav.html' %} 
     
     <div class="container mt-3">
