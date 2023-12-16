@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView
+from .views import RegisterView, ProfileView, PostCollectionView, delete_article
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -8,7 +8,8 @@ app_name = 'user'
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('profile/', auth_views.LoginView.as_view(template_name='users/user-profile.html'), name='profile'),
-    path('post-collection/', auth_views.LoginView.as_view(template_name='users/post-collection.html'), name='post-collection'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('post-collection/', PostCollectionView.as_view(), name='post-collection'),
     path('logout/', views.logout_user, name='logout'),
+    path('article/<int:article_id>/delete/', delete_article, name='delete_article'),
 ]

@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %} 
 
 {% block content %}
+
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
@@ -37,7 +38,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center">
               {% if request.user.is_authenticated %}
-              <form method="POST" action="{% url 'like_article' object.id %}">
+              <form action="profile/" method="POST" action="{% url 'like_article' object.id %}">
                 {% csrf_token %}
                 <button class="btn btn-outline-primary d-flex align-items-center likes">
                   <ion-icon name="heart-outline"></ion-icon>
@@ -107,52 +108,6 @@
       </section>
     </div>
     <!-- Side widgets-->
-  </div>
-</div>
-<!-- Footer-->
-<div class="container-fluid bg-light">
-  <div class="container">
-    <footer class="row pt-5 mt-5">
-      <div class="col mb-3">
-        <h3 class="fw-bold">Blog.</h3>
-      </div>
-
-      <div class="col mb-4">
-        <h5 class="fw-bold">About Us</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Home</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-body-secondary">About</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="col mb-4">
-        <h5 class="fw-bold">Contact us</h5>
-        <ul class="nav flex-column">
-          <br />
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-contact-us"
-              >thuytam214@gmail.com</a
-            >
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-contact-us">+ 0909099090</a>
-          </li>
-        </ul>
-      </div>
-    </footer>
   </div>
 </div>
 

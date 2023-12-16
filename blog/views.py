@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Article, Category, Comment
 from django.db.models import Q, Count
+from django.contrib.auth import logout
 
 class Index(ListView):
 	model = Article
@@ -15,6 +16,7 @@ class Index(ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['categories'] = Category.objects.all()
+		context['title'] = 'Home - Everything Of Life'
 		return context
 
 class SearchView(ListView):
@@ -49,9 +51,11 @@ class ArticlesByCategory(ListView):
 	template_name = 'blog/index.html'
 	paginate_by = 6
 
-	def get_context_data(self, **kwargs):
+	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['categories'] = Category.objects.all()
+		category = Category.objects.get(name=self.kwargs.get('category'))
+		context['title'] = category.name + ' - Everything Of Life'
 		return context
 
 	def get_queryset(self, *args, **kwargs):
@@ -73,6 +77,7 @@ class DetailArticleView(DetailView):
 		article = Article.objects.get(id=self.kwargs.get('pk'))
 		if article.likes.filter(pk=self.request.user.id).exists():
 			context['liked_by_user'] = True
+		context['title'] = article.title + ' - Everything Of Life'
 		return context
 
 class LikeArticle(View):
@@ -104,4 +109,3 @@ class DeleteArticleView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	def test_func(self):
 		article = Article.objects.get(id=self.kwargs.get('pk'))
 		return self.request.user.id == article.author.id
-	

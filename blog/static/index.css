@@ -216,9 +216,9 @@ body {
   color: #20215B;
 }
 .custom-list-group > .list-group {
-  max-height: 200px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* max-height: 200px; */
+  /* overflow-x: hidden; */
+  /* overflow-y: auto; */
 }
 .list-group-item {
   border-top: none;
@@ -228,14 +228,20 @@ body {
   color: #20215B !important;
   border-radius: unset !important;
   text-decoration: none;
+  padding: 0;
 }
 .list-group-item > a {
   color: #20215B !important;
   text-decoration: none !important;
+  display: block;
+  padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
 }
 .list-group-item > a:hover, .list-group-item > a:active, .list-group-item > a:focus{
   color: #D62828 !important;
   text-decoration: none !important;
+  padding-left: 10px;
+  transition: 0.75s;
+  background: #f3f3f3;
 }
 .scroll-shadows {
   --scrollbarBG: transparent;
@@ -283,4 +289,23 @@ body {
 .btn-signin, .btn-signup, .btn-logout{
   background-color: #20215B;
   color: white;
+}
+
+/* add code main */
+.main a{
+  text-decoration: none;
+}
+.main .card:hover{
+  transition: all 0.5s;
+  -webkit-transform: translate3d(0, -5px, 0);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+  -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-body h2{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
