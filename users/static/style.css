@@ -10,7 +10,6 @@
 }
 h1 {
   color: var(--main-text-color) !important;
-  font-weight: bolder;
   font-size: 40px;
 }
 .form-label {
@@ -35,7 +34,12 @@ h1 {
   font-size: 20px;
   font-weight: bolder;
 }
-
+.cancel-button {
+  color: #D62828 !important;
+  margin-left: 16px;
+  font-size: 18px;
+  text-decoration: none !important;
+}
 td {
   vertical-align: middle;
 }

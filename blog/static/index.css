@@ -215,11 +215,6 @@ body {
   background-color: #F9F9F9;
   color: #20215B;
 }
-.custom-list-group > .list-group {
-  /* max-height: 200px; */
-  /* overflow-x: hidden; */
-  /* overflow-y: auto; */
-}
 .list-group-item {
   border-top: none;
   border-left: none;
@@ -290,8 +285,6 @@ body {
   background-color: #20215B;
   color: white;
 }
-
-/* add code main */
 .main a{
   text-decoration: none;
 }

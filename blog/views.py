@@ -4,8 +4,9 @@ from django.views.generic import ListView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Article, Category, Comment
-from django.db.models import Q, Count
-from django.contrib.auth import logout
+from django.db.models import Q
+from django.views.generic.edit import UpdateView, CreateView
+from .forms import ArticleForm
 
 class Index(ListView):
 	model = Article
@@ -31,19 +32,54 @@ class SearchView(ListView):
 
 	def get_queryset(self):
 		query = self.request.GET.get('q')
-		# order_by = self.request.GET.get('order_by', 'title')
 			
 		if query:
 			queryset = Article.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
 		else:
 			queryset = Article.objects.all()
 
-		# if order_by == 'title':
-		# 	queryset = queryset.order_by('title')
-		# elif order_by == 'date':
-		# 	queryset = queryset.order_by('date')
-		# else:
-		# 	queryset = queryset.annotate(like_count=Count('likes')).order_by('like_count')
+		return queryset
+
+class SearchViewTitle(ListView):
+	model = Article
+	template_name = 'blog/index.html'
+	paginate_by = 6
+  
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["categories"] = Category.objects.all()
+		return context
+
+	def get_queryset(self):
+		queryset = Article.objects.all().order_by('title')
+		return queryset
+
+class SearchViewDate(ListView):
+	model = Article
+	template_name = 'blog/index.html'
+	paginate_by = 6
+  
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["categories"] = Category.objects.all()
+		return context
+
+	def get_queryset(self):
+		queryset = Article.objects.all().order_by('date')
+		return queryset
+
+class SearchViewLike(ListView):
+	model = Article
+	template_name = 'blog/index.html'
+	paginate_by = 6
+  
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context["categories"] = Category.objects.all()
+		return context
+
+	def get_queryset(self):
+		queryset = Article.objects.all().order_by('likes')
 		return queryset
 
 class ArticlesByCategory(ListView):
@@ -104,8 +140,27 @@ class CommentArticle(View):
 class DeleteArticleView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Article
 	template_name = 'blog/blog_delete.html'
-	success_url = reverse_lazy('index')
+	success_url = reverse_lazy('post-collection')
 
 	def test_func(self):
 		article = Article.objects.get(id=self.kwargs.get('pk'))
 		return self.request.user.id == article.author.id
+
+class EditArticleView(UpdateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'blog/blog_edit.html'
+    success_url = reverse_lazy('post-collection')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class CreateArticleView(LoginRequiredMixin, CreateView):
+    model = Article
+    form_class = ArticleForm
+    template_name = 'blog/blog_create.html'
+    success_url = reverse_lazy('post-collection')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

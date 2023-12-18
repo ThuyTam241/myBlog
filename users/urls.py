@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView, ProfileView, PostCollectionView, delete_article
+from .views import RegisterView, ProfileView, PostCollectionView
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -11,5 +11,4 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('post-collection/', PostCollectionView.as_view(), name='post-collection'),
     path('logout/', views.logout_user, name='logout'),
-    path('article/<int:article_id>/delete/', delete_article, name='delete_article'),
 ]

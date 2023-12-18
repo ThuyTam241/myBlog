@@ -30,9 +30,6 @@
       <div class="custom-list-group">
         <h5 class="fw-bold mb-4">Categories</h5>
         <ul class="list-group scroll-shadows">
-          <!-- <li class="list-group-item">
-            <a href="/">Clear filter</a>
-          </li> -->
           {% for category in categories %}
           <li class="list-group-item">
             <a href="/category/{{ category.name }}">→ {{ category.name }}</a>
@@ -64,8 +61,8 @@
               <img class="card-img-top object-fit-cover" src="{{ object.imageLink }}" alt="..." height="250" />
               <div class="card-body">
                 <div class="small text-muted d-flex justify-content-between">
-                  <div>{{ object.date }} by {{ object.author.username }}</div>
-                  <div class="category-text"> # {{ object.category }}</div>
+                  <div>{{ object.date }} by {{ object.author }}</div>
+                  <div class="ml-auto text-center category-text"> # {{ object.category }}</div>
                 </div>
                 <h2 class="card-title h4">
                   {{ object.title }}</h2>
